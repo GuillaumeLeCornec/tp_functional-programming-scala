@@ -20,10 +20,19 @@ object ClimateService {
    * @return Boolean True
    */
   def isClimateRelated(description: String): Boolean = {
-    val climateKeywords = List("global warming", "IPCC", "climate change")
+//    val climateKeywords = List("global warming", "IPCC", "climate change")
+//    val lowercaseDescription = description.toLowerCase
+//    climateKeywords.exists(keyword => lowercaseDescription.contains(keyword))
+//    println(lowercaseDescription)
+    val climateKeywords = List("global warming", "ipcc", "climate change")
     val lowercaseDescription = description.toLowerCase
-    climateKeywords.exists(keyword => lowercaseDescription.contains(keyword))
+    val result = climateKeywords.exists(keyword => lowercaseDescription.contains(keyword))
+    println(lowercaseDescription)
+    println("Result: " + result) // Ajout d'un println pour afficher le résultat
+    result // Retourne le résultat
   }
+
+
 
   /**
    * parse a list of raw data and transport it with type into a list of CO2Record

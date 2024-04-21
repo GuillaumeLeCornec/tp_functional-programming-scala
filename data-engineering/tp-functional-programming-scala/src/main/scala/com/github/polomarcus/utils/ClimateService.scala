@@ -72,14 +72,23 @@ object ClimateService {
    * **Tips**: look at the read me to find some tips for this function
    */
   def getMinMax(list: List[CO2Record]) : (Double, Double) = {
+//    if (list.isEmpty) throw new IllegalArgumentException("List cannot be empty")
+//    var minValue = Double.MaxValue
+//    var maxValue = Double.MinValue
+//    list.foreach { record =>
+//      minValue = Math.min(minValue, record.value)
+//      maxValue = Math.max(maxValue, record.value)
+//    }
+//    (minValue, maxValue)
     if (list.isEmpty) throw new IllegalArgumentException("List cannot be empty")
-    var minValue = Double.MaxValue
-    var maxValue = Double.MinValue
-    list.foreach { record =>
-      minValue = Math.min(minValue, record.value)
-      maxValue = Math.max(maxValue, record.value)
+
+    val (minValue, maxValue) = list.foldLeft((Double.MaxValue, Double.MinValue)) {
+      case ((min, max), record) =>
+        (Math.min(min, record.ppm), Math.max(max, record.ppm))
     }
+
     (minValue, maxValue)
+
   }
 
   def getMinMaxByYear(list: List[CO2Record], year: Int) : (Double, Double) = ???

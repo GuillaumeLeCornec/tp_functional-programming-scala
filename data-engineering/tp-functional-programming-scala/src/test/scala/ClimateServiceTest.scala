@@ -34,7 +34,17 @@ class ClimateServiceTest extends AnyFunSuite {
     assert(true == false)
   }
 
-  test ("getMinMax") {
-    assert([12,4,2,6,5]==[2,12])
+  test("getMinMax") {
+    val records = List(
+      CO2Record(year = 2000, month = 1, ppm = 12),
+      CO2Record(year = 2000, month = 2, ppm = 4),
+      CO2Record(year = 2000, month = 3, ppm = 2),
+      CO2Record(year = 2000, month = 4, ppm = 6),
+      CO2Record(year = 2000, month = 5, ppm = 5)
+    )
+
+    val (minValue, maxValue) = ClimateService.getMinMax(records)
+    assert(minValue == 2)
+    assert(maxValue == 12)
   }
 }

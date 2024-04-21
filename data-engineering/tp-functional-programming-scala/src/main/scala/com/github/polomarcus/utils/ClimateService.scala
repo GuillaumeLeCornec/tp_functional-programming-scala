@@ -8,7 +8,10 @@ import scala.util.matching.Regex
 object ClimateService {
   val logger = Logger(ClimateService.getClass)
 
+
   /**
+   *
+   *
    * detect if a sentence is climate related by looking for these words in sentence :
    * global warming
    * IPCC

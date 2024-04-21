@@ -29,10 +29,7 @@ class ClimateServiceTest extends AnyFunSuite {
     assert(ClimateService.parseRawData(list1) == output)
   }
 
-  //@TODO
-  test("filterDecemberData") {
-    assert(true == false)
-  }
+
 
   test("getMinMax") {
     val records = List(
@@ -62,5 +59,34 @@ class ClimateServiceTest extends AnyFunSuite {
     assert(maxValue == 10)
   }
 
+  test("minMaxDifference") {
+    val records = List(
+      CO2Record(year = 2000, month = 1, ppm = 12),
+      CO2Record(year = 2001, month = 2, ppm = 10),
+      CO2Record(year = 2001, month = 3, ppm = 9),
+      CO2Record(year = 2001, month = 4, ppm = 6),
+      CO2Record(year = 2000, month = 5, ppm = 5)
+    )
+
+    val diff = ClimateService.minMaxDifference(records, 2001)
+    assert(diff == 4)
+  }
+
+  test("filterDecemberData") {
+    val records = List(
+      CO2Record(year = 2000, month = 1, ppm = 12),
+      CO2Record(year = 2001, month = 12, ppm = 10),
+      CO2Record(year = 2001, month = 3, ppm = 9),
+      CO2Record(year = 2001, month = 4, ppm = 6),
+      CO2Record(year = 2000, month = 12, ppm = 5)
+    )
+    val expectedFilteredRecords = List(
+      CO2Record(year = 2000, month = 1, ppm = 12),
+      CO2Record(year = 2001, month = 3, ppm = 9),
+      CO2Record(year = 2001, month = 4, ppm = 6)
+    )
+    val filteredList = ClimateService.filterDecemberData(records)
+    assert(filteredList == expectedFilteredRecords)
+  }
 
 }

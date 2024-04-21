@@ -65,7 +65,11 @@ object ClimateService {
    * @param list
    * @return a list
    */
-  def filterDecemberData(list: List[Option[CO2Record]]) : List[CO2Record] = ???
+  def filterDecemberData(list: List[CO2Record]) : List[CO2Record] = {
+    val filteredList = list.filter(_.month != 12)
+    println(filteredList)
+    filteredList
+  }
 
 
   /**
@@ -86,7 +90,8 @@ object ClimateService {
       case ((min, max), record) =>
         (Math.min(min, record.ppm), Math.max(max, record.ppm))
     }
-
+    println(minValue)
+    println(maxValue)
     (minValue, maxValue)
 
   }
@@ -99,6 +104,22 @@ object ClimateService {
     }
   }
 
+  def minMaxDifference(list: List[CO2Record], year: Int) : Double = {
+    val recordsForYear = list.filter(_.year == year)
+    println(recordsForYear)
+    if (recordsForYear.isEmpty) throw new IllegalArgumentException("List cannot be empty")
+    else {
+      val (minValue, maxValue) = recordsForYear.foldLeft((Double.MaxValue, Double.MinValue)) {
+        case ((min, max), recordsForYear) =>
+          (Math.min(min, recordsForYear.ppm), Math.max(max, recordsForYear.ppm))
+      }
+      println(minValue)
+      println(maxValue)
+      var diff=maxValue - minValue
+      println(diff)
+      diff
+    }
+  }
 
   /**
    * use this function side src/main/scala/com/polomarcus/main/Main (with sbt run)

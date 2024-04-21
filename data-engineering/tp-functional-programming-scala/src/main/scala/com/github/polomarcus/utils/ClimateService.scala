@@ -91,7 +91,14 @@ object ClimateService {
 
   }
 
-  def getMinMaxByYear(list: List[CO2Record], year: Int) : (Double, Double) = ???
+  def getMinMaxByYear(list: List[CO2Record], year: Int) : (Double, Double) = {
+    val recordsForYear = list.filter(_.year == year)
+    if (list.isEmpty) throw new IllegalArgumentException("List cannot be empty")
+    else {
+      getMinMax(recordsForYear)
+    }
+  }
+
 
   /**
    * use this function side src/main/scala/com/polomarcus/main/Main (with sbt run)

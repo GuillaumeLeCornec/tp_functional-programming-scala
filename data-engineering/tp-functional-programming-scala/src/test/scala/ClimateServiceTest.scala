@@ -47,4 +47,20 @@ class ClimateServiceTest extends AnyFunSuite {
     assert(minValue == 2)
     assert(maxValue == 12)
   }
+
+  test("getMinMaxByYear") {
+    val records = List(
+      CO2Record(year = 2000, month = 1, ppm = 12),
+      CO2Record(year = 2001, month = 2, ppm = 10),
+      CO2Record(year = 2001, month = 3, ppm = 9),
+      CO2Record(year = 2001, month = 4, ppm = 6),
+      CO2Record(year = 2000, month = 5, ppm = 5)
+    )
+
+    val (minValue, maxValue) = ClimateService.getMinMaxByYear(records, 2001)
+    assert(minValue == 6)
+    assert(maxValue == 10)
+  }
+
+
 }

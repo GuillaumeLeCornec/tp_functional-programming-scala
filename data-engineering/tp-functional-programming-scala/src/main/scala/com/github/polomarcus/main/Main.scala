@@ -1,4 +1,4 @@
-package com.github.polomarcus.main
+//package com.github.polomarcus.main
 
 import com.typesafe.scalalogging.Logger
 import com.github.polomarcus.utils.ClimateService
@@ -17,6 +17,7 @@ object Main {
 
     logger.info("Stopping the app")
     System.exit(0)
+
   }
 }
 

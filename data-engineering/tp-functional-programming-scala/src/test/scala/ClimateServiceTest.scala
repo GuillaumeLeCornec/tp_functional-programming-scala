@@ -23,7 +23,7 @@ class ClimateServiceTest extends AnyFunSuite {
     // our output of our method "parseRawData"
     val co2RecordWithType = CO2Record(firstRecord._1, firstRecord._2, firstRecord._3)
     val co2RecordWithType2 = CO2Record(secondRecord._1, secondRecord._2, secondRecord._3)
-    val output = List(Some(co2RecordWithType), Some(co2RecordWithType2))
+    val output = List(co2RecordWithType, co2RecordWithType2)
 
     // we call our function here to test our input and output
     assert(ClimateService.parseRawData(list1) == output)
@@ -88,5 +88,18 @@ class ClimateServiceTest extends AnyFunSuite {
     val filteredList = ClimateService.filterDecemberData(records)
     assert(filteredList == expectedFilteredRecords)
   }
+//
+//  test("showCo2") {
+//    val records = List(
+//      Some(CO2Record(year = 2000, month = 1, ppm = 12)),
+//      Some(CO2Record(year = 2001, month = 12, ppm = 10)),
+//      Some(CO2Record(year = 2001, month = 3, ppm = 9)),
+//      Some(CO2Record(year = 2001, month = 4, ppm = 6)),
+//      Some(CO2Record(year = 2000, month = 12, ppm = 5)),
+//      None // Example of None value in the list
+//    )
+//
+//    ClimateService.showCO2Data(records)
+//  }
 
 }

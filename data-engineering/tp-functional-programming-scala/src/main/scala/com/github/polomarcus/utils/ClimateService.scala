@@ -48,8 +48,8 @@ object ClimateService {
 //    ???
 //  }
 
-  def parseRawData(list: List[(Int, Int, Double)]) : List[Option[CO2Record]] = {
-    list.map {
+  def parseRawData(list: List[(Int, Int, Double)]) : List[CO2Record] = {
+    list.flatMap {
       case (year, month, ppm) =>
         val record = CO2Record(year, month, ppm)
         if (record.isValidPpmValue) Some(record)
@@ -129,10 +129,19 @@ object ClimateService {
    *
    * @param list
    */
-  def showCO2Data(list: List[Option[CO2Record]]): Unit = {
+  def showCO2Data(list: List[CO2Record]): Unit = {
     logger.info("Call ClimateService.filterDecemberData here")
-
+    val filteredList = ClimateService.filterDecemberData(list)
     logger.info("Call record.show function here inside a map function")
+    filteredList.foreach { record =>
+      if (record != None) {
+        logger.info(record.show)
+      } else {
+        logger.warn("Found a None value in the list.")
+      }
+//      case record => logger.info(record.show)
+//      case None => logger.warn("Found a None value in the list.")
+    }
   }
 
   /**

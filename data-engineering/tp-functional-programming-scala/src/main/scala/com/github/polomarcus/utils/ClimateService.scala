@@ -47,7 +47,17 @@ object ClimateService {
    */
   def getMinMax(list: List[CO2Record]) : (Double, Double) = ???
 
-  def getMinMaxByYear(list: List[CO2Record], year: Int) : (Double, Double) = ???
+  def getMinMaxByYear(list: List[CO2Record], year: Int) : (Double, Double) = {
+    if (list.isEmpty) throw new IllegalArgumentException("List cannot be empty")
+    var minValue = Double.MaxValue
+    var maxValue = Double.MinValue
+    list.foreach { record =>
+      minValue = Math.min(minValue, record.value)
+      maxValue = Math.max(maxValue, record.value)
+    }
+    (minValue, maxValue)
+  }
+  }
 
   /**
    * use this function side src/main/scala/com/polomarcus/main/Main (with sbt run)

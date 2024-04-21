@@ -130,6 +130,7 @@ object ClimateService {
    * @param list
    */
   def showCO2Data(list: List[CO2Record]): Unit = {
+    var none_amount = 0
     logger.info("Call ClimateService.filterDecemberData here")
     val filteredList = ClimateService.filterDecemberData(list)
     logger.info("Call record.show function here inside a map function")
@@ -137,11 +138,13 @@ object ClimateService {
       if (record != None) {
         logger.info(record.show)
       } else {
+        none_amount = none_amount+1
         logger.warn("Found a None value in the list.")
       }
 //      case record => logger.info(record.show)
 //      case None => logger.warn("Found a None value in the list.")
     }
+    println(none_amount)
   }
 
   /**

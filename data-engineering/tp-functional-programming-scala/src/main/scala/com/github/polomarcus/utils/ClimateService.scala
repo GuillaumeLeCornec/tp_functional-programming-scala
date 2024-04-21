@@ -19,7 +19,14 @@ object ClimateService {
    * @param description "my awesome sentence contains a key word like climate change"
    * @return Boolean True
    */
-  def isClimateRelated(description: String): Boolean = ???
+  def isClimateRelated(description: String): Boolean = {
+    rawData.map {
+      case (year, month, ppm) =>
+        if (ppm > 0) Some(CO2Record(year, month, ppm))
+        else None
+    }
+
+  }
 
   /**
    * parse a list of raw data and transport it with type into a list of CO2Record
@@ -28,6 +35,8 @@ object ClimateService {
    * otherwise : None
    * you can access to Tuple with myTuple._1, myTuple._2, myTuple._3
    */
+
+
   def parseRawData(list: List[(Int, Int, Double)]) : List[Option[CO2Record]] = {
     list.map { record => ??? }
     ???
@@ -45,9 +54,7 @@ object ClimateService {
   /**
    * **Tips**: look at the read me to find some tips for this function
    */
-  def getMinMax(list: List[CO2Record]) : (Double, Double) = ???
-
-  def getMinMaxByYear(list: List[CO2Record], year: Int) : (Double, Double) = {
+  def getMinMax(list: List[CO2Record]) : (Double, Double) = {
     if (list.isEmpty) throw new IllegalArgumentException("List cannot be empty")
     var minValue = Double.MaxValue
     var maxValue = Double.MinValue
@@ -57,6 +64,10 @@ object ClimateService {
     }
     (minValue, maxValue)
   }
+  }
+
+  def getMinMaxByYear(list: List[CO2Record], year: Int) : (Double, Double) = {
+
   }
 
   /**

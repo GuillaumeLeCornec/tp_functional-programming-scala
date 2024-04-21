@@ -41,12 +41,23 @@ object ClimateService {
    * otherwise : None
    * you can access to Tuple with myTuple._1, myTuple._2, myTuple._3
    */
-
+//
+//
+//  def parseRawData(list: List[(Int, Int, Double)]) : List[Option[CO2Record]] = {
+//    list.map { record => ??? }
+//    ???
+//  }
 
   def parseRawData(list: List[(Int, Int, Double)]) : List[Option[CO2Record]] = {
-    list.map { record => ??? }
-    ???
+    list.map {
+      case (year, month, ppm) =>
+        val record = CO2Record(year, month, ppm)
+        if (record.isValidPpmValue) Some(record)
+        else None
+    }
   }
+
+
 
   /**
    * remove all values from december (12) of every year
@@ -60,15 +71,16 @@ object ClimateService {
   /**
    * **Tips**: look at the read me to find some tips for this function
    */
-  def getMinMax(list: List[CO2Record]) : (Double, Double) = ???
-//    if (list.isEmpty) throw new IllegalArgumentException("List cannot be empty")
-//    var minValue = Double.MaxValue
-//    var maxValue = Double.MinValue
-//    list.foreach { record =>
-//      minValue = Math.min(minValue, record.value)
-//      maxValue = Math.max(maxValue, record.value)
-//    }
-//    (minValue, maxValue)
+  def getMinMax(list: List[CO2Record]) : (Double, Double) = {
+    if (list.isEmpty) throw new IllegalArgumentException("List cannot be empty")
+    var minValue = Double.MaxValue
+    var maxValue = Double.MinValue
+    list.foreach { record =>
+      minValue = Math.min(minValue, record.value)
+      maxValue = Math.max(maxValue, record.value)
+    }
+    (minValue, maxValue)
+  }
 
   def getMinMaxByYear(list: List[CO2Record], year: Int) : (Double, Double) = ???
 

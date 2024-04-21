@@ -33,4 +33,8 @@ class ClimateServiceTest extends AnyFunSuite {
   test("filterDecemberData") {
     assert(true == false)
   }
+
+  test ("getMinMax") {
+    assert([12,4,2,6,5]==[2,12])
+  }
 }

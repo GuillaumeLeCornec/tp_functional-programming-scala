@@ -20,12 +20,9 @@ object ClimateService {
    * @return Boolean True
    */
   def isClimateRelated(description: String): Boolean = {
-    rawData.map {
-      case (year, month, ppm) =>
-        if (ppm > 0) Some(CO2Record(year, month, ppm))
-        else None
-    }
-
+    val climateKeywords = List("global warming", "IPCC", "climate change")
+    val lowercaseDescription = description.toLowerCase
+    climateKeywords.exists(keyword => lowercaseDescription.contains(keyword))
   }
 
   /**
@@ -54,21 +51,17 @@ object ClimateService {
   /**
    * **Tips**: look at the read me to find some tips for this function
    */
-  def getMinMax(list: List[CO2Record]) : (Double, Double) = {
-    if (list.isEmpty) throw new IllegalArgumentException("List cannot be empty")
-    var minValue = Double.MaxValue
-    var maxValue = Double.MinValue
-    list.foreach { record =>
-      minValue = Math.min(minValue, record.value)
-      maxValue = Math.max(maxValue, record.value)
-    }
-    (minValue, maxValue)
-  }
-  }
+  def getMinMax(list: List[CO2Record]) : (Double, Double) = ???
+//    if (list.isEmpty) throw new IllegalArgumentException("List cannot be empty")
+//    var minValue = Double.MaxValue
+//    var maxValue = Double.MinValue
+//    list.foreach { record =>
+//      minValue = Math.min(minValue, record.value)
+//      maxValue = Math.max(maxValue, record.value)
+//    }
+//    (minValue, maxValue)
 
-  def getMinMaxByYear(list: List[CO2Record], year: Int) : (Double, Double) = {
-
-  }
+  def getMinMaxByYear(list: List[CO2Record], year: Int) : (Double, Double) = ???
 
   /**
    * use this function side src/main/scala/com/polomarcus/main/Main (with sbt run)

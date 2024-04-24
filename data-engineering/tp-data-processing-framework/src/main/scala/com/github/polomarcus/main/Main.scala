@@ -5,6 +5,7 @@ import com.typesafe.scalalogging.Logger
 import com.github.polomarcus.utils.{ClimateService, NewsService, SparkService}
 import org.apache.spark.sql.{DataFrame, Dataset, SparkSession}
 
+// our main function
 object Main {
   def main(args: Array[String]) {
     val logger = Logger(this.getClass)

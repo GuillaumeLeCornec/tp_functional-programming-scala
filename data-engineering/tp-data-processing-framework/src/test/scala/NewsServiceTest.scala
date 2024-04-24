@@ -5,6 +5,7 @@ import org.scalatest.funsuite.AnyFunSuite
 
 import java.sql.Timestamp
 
+// OUr tests
 //@See https://www.scalatest.org/scaladoc/3.1.2/org/scalatest/funsuite/AnyFunSuite.html
 class NewsServiceTest extends AnyFunSuite {
   val spark = SparkService.getAndConfigureSparkSession()

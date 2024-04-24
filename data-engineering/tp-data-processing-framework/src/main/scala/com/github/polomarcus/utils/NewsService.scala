@@ -78,6 +78,8 @@
 //    return dataset.count()// code here
 //  }
 //}
+
+//Our NewService functions
 package com.github.polomarcus.utils
 
 import com.typesafe.scalalogging.Logger

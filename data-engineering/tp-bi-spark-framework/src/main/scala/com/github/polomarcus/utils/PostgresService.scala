@@ -25,7 +25,13 @@ object PostgresService {
          |""".stripMargin)
 
     dataset.write
-      ???
+      .format("jdbc")
+      .option("url", url)
+      .option("dbtable", tableName)
+      .option("user", user)
+      .option("password", password)
+      .mode(SaveMode.Append) // Choose the mode that suits your requirements
+      .save()
 
     logger.info("Saved news inside PG database")
 
